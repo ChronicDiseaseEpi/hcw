@@ -1,0 +1,396 @@
+---
+title: "Paper_hcws"
+output:  github_document
+---
+
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, include = FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = FALSE)
+knitr::knit_hooks$set(inline = function(x) {   if(!is.numeric(x)){     x   }else{    prettyNum(round(x,2), big.mark=",")    } })
+```
+
+
+```{r sourcetables}
+library(ggplot2)
+library(scales)
+# library(captioner)
+# library(flextable)
+# library(officer)
+library(tidyverse)
+```
+
+
+# Read data
+
+```{r create tables, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE}
+tbl_string <- c("create_section1_tables.R", "create_section2_tables.R", "create_section3_tables.R",
+  "create_tables_regression.R")
+for(tbl_string_i in tbl_string) {
+  print(tbl_string_i)
+  source(here::here("rmarkdown/phs-stats-report/skeleton", tbl_string_i))
+}
+
+cases_tbl <- read_csv(here("outputs", "table3_paper.csv"))
+
+rm(hcw_data, hhd_data)
+hcw <- readRDS(here("data", "hcw_for_cc.rds"))
+hhd <- readRDS(here("data", "hhd_for_cc.rds"))
+hh_smry <- readRDS(here("data", "household_summary.Rds"))
+cases_pop <- readRDS(here("outputs", "pop_neg_smy.rds"))
+
+
+```
+
+# Reformat results for presenting in-line with text
+
+```{r rolesmry}
+## n% each role
+a <- hcw %>% 
+  count(role) %>% 
+  mutate(prcnt = round(100*n / sum(n), 1),
+         res = paste0(n, " (", prcnt, "%)"))
+a <- as.data.frame(a)
+rownames(a) <- a$role
+role <- a
+rm(a)
+```
+
+```{r cases_each_category}
+# Cases and proportion of cases within each category
+cases_n <- cases_tbl %>% 
+  slice(1) %>% 
+  select(-1) %>% 
+  t() %>% 
+  as.vector() %>% 
+  as.integer()
+MakePrp <- function(cases_n){
+  names(cases_n) <- c("hcw", "hhd", "pop")
+cases_n["tot"] <- sum(cases_n )
+cases_n["hcwhhd"] <- cases_n["hcw"] + cases_n["hhd"]
+cases_p <- cases_n
+cases_p[] <- round(100*cases_n/cases_n["tot"],1)
+list(n = cases_n, p = cases_p)
+}
+cases_n <- MakePrp(cases_n)
+cases_p <- cases_n$p
+cases_n <- cases_n$n
+cases_18to65 <- cases_tbl %>% 
+  filter(X1 == "18-65") %>% 
+  select(-1) %>% 
+  mutate_all(function(x) str_extract(x, "[0-9]{1,4}")) %>% 
+  t() %>% 
+  as.vector() %>% 
+  as.integer()
+cases_18to65 <- MakePrp(cases_18to65)
+cases_18to65_n <- cases_18to65$n
+cases_18to65_p <- cases_18to65$p
+rm(cases_18to65)
+rm(MakePrp)
+```
+
+```{r sexsmyr}
+## % male and female
+Nprcnt <- function(x, n_digits = 1){
+  n <- sum(x)
+  prcnt <-  formatC(100*mean(x), format = "f", digits = n_digits)
+  paste0(n, " (", prcnt,"%)") 
+}
+female <- Nprcnt(1-hcw$male)
+female_hhd <- Nprcnt(1-hhd$male)
+
+```
+
+```{r mdlsmry}
+mdl_outs <- mdl_outs %>% 
+  mutate(res_styl_line = str_replace(res, "\\s\\(", "; 95% CI ") %>% 
+           str_remove("\\)"),
+         res_styl_brac = str_replace(res, "\\(", "(95% CI "))
+
+```
+
+
+```{r summarisehosptlsd}
+mean_hcw_risk <- mean(100*hcw$hosptlsd) %>% 
+  formatC(format = "f", digits = 2)
+mean_hhd_risk <- mean(100*hhd$hosptlsd) %>% 
+  formatC(format = "f", digits = 2)
+```
+
+```{r summarisedeaths}
+## death summaries
+hhd_death <- hhd %>% 
+  filter(ncov_result != "positive") %>% 
+  mutate(deaths = covid_cod | covid_ucod) %>% 
+  select(deaths) %>% 
+  pull()
+hhd_death_m = formatC(100*mean(hhd_death), format = "f", digits = 3)
+hhd_death <- sum(hhd_death)
+hhd_death_smry <- paste0(hhd_death, " (", hhd_death_m, "%)")
+
+hcw_death <- hcw %>% 
+  filter(ncov_result != "positive") %>% 
+  mutate(deaths = covid_cod | covid_ucod) %>% 
+  select(deaths) %>% 
+  pull()
+hcw_death_m = formatC(100*mean(hcw_death), format = "f", digits = 3)
+hcw_death <- sum(hcw_death)
+hcw_death_smry <- paste0(hcw_death, " (", hcw_death_m, "%)")
+```
+
+
+```{r summariseallevents}
+abs_rsk <- table_3_1[-1, -1] %>% 
+  as.matrix()
+rownames(abs_rsk) <- c("n", "hosp", "hdu_icu", "icu", "dead28", "deadother")
+colnames(abs_rsk) <- c("tot", "undet", "npf", "pf")
+
+```
+
+
+```{r kidssa}
+kids_cox <- mdl_outs %>% 
+  filter(comparison == "cox", model == "agesex_kids", staff == "household", params == "rolepf_any") %>% 
+  pull(res_styl_line)
+older_cox <- mdl_outs %>% 
+  filter(comparison == "cox", model == "agesex_gt65", staff == "household", params == "rolepf_any") %>% 
+  pull(res_styl_line)
+
+kids_pop <- mdl_outs %>% 
+  filter(comparison == "pop", model == "modkids", staff == "household", params == "rolepopulation") %>% 
+  pull(res_styl_line)
+
+older_pop <- mdl_outs %>% 
+  filter(comparison == "pop", model == "modolder", staff == "household", params == "rolepopulation") %>% 
+  pull(res_styl_line)
+
+```
+
+
+```{r absriskn}
+## reformat sensitivity analysis calculating who would need redeployed
+hcw_redep <- hcw %>% filter(age >=60, male ==1, como_count >=1, role %in% c("pf_any", "undetermined"))
+hhd_iller <- hhd %>% filter(age >= 60, male ==1, como_count >=1) %>% select(hid)
+hcw_redep2 <- hcw %>% filter(role %in% c("pf_any", "undetermined")) %>% semi_join(hhd_iller)
+setdiff(hcw_redep$anon_id, hcw_redep2$anon_id) %>% length()
+additional <- setdiff(hcw_redep2$anon_id, hcw_redep$anon_id) %>% length()
+intersect(hcw_redep$anon_id, hcw_redep2$anon_id) %>% length()
+redep <- union(hcw_redep$anon_id, hcw_redep2$anon_id) %>% length()
+repdep_prcnt <- formatC(100*redep/nrow(hcw %>% filter(role == "pf_any")), digits = 2, format = "f", flag = "0")
+```
+
+```{r caseseries}
+cases_tbl2 <- cases_tbl %>% 
+  clean_names() %>% 
+  mutate_at(vars(-x1), function(x) if_else(str_detect(cases_tbl$X1, "\\%"), str_replace(x, "\\)", "%)"), x))
+cases_lst <- by(cases_tbl2, INDICES = cases_tbl2$x1, function(x) cases_tbl2[cases_tbl2$x1 %in% x, -1] %>% t() %>% as.vector())
+cases_lst <- map(cases_lst, ~ .x %>% set_names(c("hcw", "hhd", "pop")))
+names(cases_lst) <- make_clean_names(names(cases_lst))
+
+abs_with_explanation <- abs_rsk["hosp", "tot"]  %>% 
+  str_replace("/", " cases in ") %>% 
+  str_replace("\\(", "patietn facing healthcare workers (")
+
+```
+
+# Results
+
+There were `r nrow(hcw)` healthcare workers and `r nrow(hhd)` household members. `r female` of healthcare workers, but only `r female_hhd` of household members, were women. Over half of healthcare workers (`r role["pf_any", "res"] `) were patient-facing with `r role["npf", "res"] ` and `r role["undetermined", "res"] ` classified as non-patient facing and undetermined respectively (Table 1). Most patient facing healthcare workers were in front door roles (*Supplementary table 1*).
+
+Healthcare workers accounted for `r cases_18to65_p["hcw"]`% (`r cases_18to65_n["hcw"]`/`r cases_18to65_n["tot"]`) of all COVID-19 hospitalizations in Scotland in the 18-65-year age group. Including household members this increased to `r cases_18to65_p["hcwhhd"]`% (`r cases_18to65_n["hcwhhd"]`/`r cases_18to65_n["tot"]`) (Table 2).
+
+
+## Risk of COVID-19 hospitalization in healthcare workers 
+
+`r abs_rsk["hosp", "pf"]`, `r abs_rsk["hosp", "npf"]` and `r abs_rsk["hosp", "undet"]` patient facing, non-patient facing and undetermined healthcare workers respectively were hospitalized with COVID-19 (Figure 1a). `r hcw_death_smry` healthcare workers died with COVID-19 as the underlying or contributory cause on their death certificate without a positive test for SARS-CoV2 (the equivalent number for household members was `r hhd_death_smry`). Such deaths were not included in the analysis due to the possibility of non-differential misclassification bias.
+
+Compared to non-patient facing, after adjusting for age, sex, socio-economic status, ethnicity and comorbidity, patient facing healthcare workers were at a higher risk of hospitalization (hazard ratio [HR] `r mdl_outs %>% filter(staff == "staff", model == "como", params == "rolepf_any") %>% pull(res_styl_line)`, Table 2, Supplementary Table 2). There was no evidence of interaction (on the relative scale) by age, sex or comorbidity (p-values 0.57, 0.15 and 0.55 respectively). Within healthcare workers in patient-facing roles, compared to those in the ‘other’ category, front-door workers were more likely to be hospitalized (HR `r mdl_outs %>% filter(staff == "staff", model == "subrole", params == "role_subpf_front") %>% pull(res_styl_line)`, Figure 1b). For workers in AGP roles, the risk was similar (HR `r mdl_outs %>% filter(staff == "staff", model == "subrole", params == "role_subpf_resp_oro_agp") %>% pull(res_styl_line)`).  Only `r sum(hcw$role_sub == "pf_icu")` healthcare workers were assigned to the ICU category, among whom there were only `r sum(hcw$hosptlsd[hcw$role_sub == "pf_icu"])` hospitalizations, both of which occurred at an early stage of the pandemic (HR `r mdl_outs %>% filter(staff == "staff", model == "subrole", params == "role_subpf_icu") %>% pull(res_styl_line)`, Figure 1b).
+
+Compared to the general population, the risk among non-patient facing healthcare workers was not increased, including  after adjusting for age, sex, socio-economic deprivation and comorbidity (HR `r mdl_outs %>% filter(comparison == "pop", staff == "staff", params == "rolepopulation", model == "como") %>% pull(res_styl_line)` Figure 1a, Table 2). Undetermined healthcare workers had an intermediate level of risk between that of patient facing and non-patient-facing healthcare workers.
+
+## Risk of COVID-19 hospitalization in household members of healthcare workers
+
+Similar, albeit attenuated associations were seen among household members. In models adjusting for age and sex, compared to those in non-patient facing households, those in patient facing households had a higher risk of hospitalization  (HR `r mdl_outs %>% filter(staff == "household", model == "agesex", params == "rolepf_any") %>% pull(res_styl_line)`, Table 2). This association was also seen after adjusting for age, sex, ethnicity, socio-economic deprivation and comorbidity (HR `r mdl_outs %>% filter(staff == "household", model == "como", params == "rolepf_any") %>% pull(res_styl_line)`). Those in non-patient facing households had a similar risk to that seen in the general population (`r mdl_outs %>% filter(staff == "household", model == "como", params == "rolepopulation") %>% pull(res_styl_line)`, Figure 1A, Table 2, Supplementary Table 3).
+
+
+## Age, sex and comorbidity
+Figure 2 illustrates the absolute risk 90-day risk (fromthe 1st of March 2020) to healthcare workers and households based on Cox models adjusting for role, age, sex and comorbidity. For the majority of healthcare workers and household members the risks remained below 0.5%. In older men with at least one comorbidity who worked in a patient facing role or lived in a "patient facing" household had a 1% risk. Among patient facing healthcare workers, `r nrow(hcw_redep)` were men aged 60-65 with one or more comorbidity and `r additional` had a household member with these characteristics, `r repdep_prcnt` meeting either.
+
+
+## Characteristics and outcomes of hospitalised COVID-19 cases in healthcare workers, household members and the general population
+
+Among COVID-19 hospitalizations, compared to the general population, healthcare workers were similar in terms of age and comorbidity (Table 3). There were however lower rates of admission to ICU (`r cases_lst$intensive_care_percent["hcw"]` in healthcare workers and `r cases_lst$intensive_care_percent["pop"]` in the working age population) and a lower proportion of deaths occurring within 28 days (`r cases_lst$died_percent["hcw"]` versus `r cases_lst$died_percent["pop"]`). Household members were more similar to the general population.
+
+
+## Table 1
+
+```{r t1staffhh, echo = FALSE, message = FALSE}
+# table_1_2
+names(table_1_2_hh) <- names(table_1_2)
+names(table_1_2_hh)[-1] <- paste0("Household of ", str_to_lower(names(table_1_2_hh))[-1])
+names(table_1_2_hh)[2] <- "Total household"
+table1_both <- table_1_2 %>% left_join(table_1_2_hh) %>% 
+  slice(-1)
+table1_both <- bind_rows(table1_both %>% filter(row_names == "**Sex n(%)**"),
+                         table1_both %>% filter(!row_names == "**Sex n(%)**")) %>% 
+  mutate(row_names = if_else(row_names == "**Sex n(%)**", "N", row_names)) %>% 
+  mutate_at(vars(-row_names), ~ if_else(row_names == "N", str_extract(.x, "[0-9]{1,}"), .x)) %>% 
+  filter(!row_names == "**All staff n(%)**")
+# table1_both$row_names
+table1_both <- table1_both %>% 
+  mutate_all(function(x) if_else(str_detect(x, "100\\%") | str_detect(x, "100\\.1\\%") | is.na(x), "", x)) 
+table1_both <- table1_both %>% 
+  filter(!row_names %in% c("Male", "Unknown", "Missing")) %>% 
+  mutate(row_names = if_else(row_names %in% 
+                               c("white", "south asian", "chinese", "other",
+                                 "black"),
+                             str_to_title(row_names),
+                             row_names))
+which(table1_both$row_names == "Black")
+which(table1_both$row_names == "South Asian")
+names(table1_both)[1] <- " "
+table1_both <- table1_both[c(1:13, 16, 14:15, 17:nrow(table1_both)) , ]
+row.names(table1_both) <- NULL
+knitr::kable(table1_both)
+```
+
+
+
+## Supplementary Table 1 - Baseline by sub-role for healthcare workers
+
+```{r table1sr}
+table_1_2_sub_role2 <- table_1_2_sub_role %>% 
+  slice(-1)
+table_1_2_sub_role2 <- bind_rows(table_1_2_sub_role2 %>% filter(row_names == "**Sex n(%)**"),
+                         table_1_2_sub_role2 %>% filter(!row_names == "**Sex n(%)**")) %>% 
+  mutate(row_names = if_else(row_names == "**Sex n(%)**", "N", row_names)) %>% 
+  mutate_at(vars(-row_names), ~ if_else(row_names == "N", str_extract(.x, "[0-9]{1,}"), .x)) %>% 
+  filter(!row_names == "**All staff n(%)**")
+# table_1_2_sub_role2$row_names
+table_1_2_sub_role2 <- table_1_2_sub_role2 %>% 
+  mutate_all(function(x) if_else(str_detect(x, "100\\%") | str_detect(x, "100\\.1\\%") | is.na(x), "", x)) 
+table_1_2_sub_role2 <- table_1_2_sub_role2 %>% 
+  filter(!row_names %in% c("Male", "Unknown", "Missing")) %>% 
+  mutate(row_names = if_else(row_names %in% 
+                               c("white", "south asian", "chinese", "other",
+                                 "black"),
+                             str_to_title(row_names),
+                             row_names))
+black <- which(table_1_2_sub_role2$row_names == "Black")
+s_asian <- which(table_1_2_sub_role2$row_names == "South Asian")
+names(table_1_2_sub_role2)[1] <- " "
+table_1_2_sub_role2 <- table_1_2_sub_role2[c(1:s_asian, black, (s_asian+1):(black-1), (black+1):nrow(table_1_2_sub_role2)) , ]
+rownames(table_1_2_sub_role2) <- NULL
+knitr::kable(table_1_2_sub_role2)
+
+```
+
+## Table 2 Regression models
+
+```{r table2}
+## regression component
+mdl_outs5 <- mdl_outs4 %>% 
+  select(staff,
+         Model = model,
+         Population = rolepopulation,
+         `Non-patient facing` = rolenpf,
+         Undetermined = roleundetermined,
+         `Patient facing` = rolepf_any)
+mdl_outs5_hh <- mdl_outs5 %>% 
+  filter(staff == "household") %>% 
+  select(-staff, -Model) %>% 
+  as.matrix()
+mdl_outs5_st <- mdl_outs5 %>% 
+  filter(staff == "staff") %>% 
+  select(-staff) %>% 
+  as.matrix()
+brs <- cbind(mdl_outs5_st, mdl_outs5_hh) 
+
+## counts component
+hhd_t2 <- hhd %>% 
+  group_by(role) %>% 
+  summarise(N = length(hosptlsd),
+            Hospitalised = sum(hosptlsd),
+            `Risk (%)` = formatC(100*mean(hosptlsd), format = "f", digits = 2)) %>% 
+  as.data.frame()
+
+hcw_t2 <- hcw %>% 
+  group_by(role) %>% 
+  summarise(N = length(hosptlsd),
+            Hospitalised = sum(hosptlsd),
+            `Risk (%)` = formatC(100*mean(hosptlsd), format = "f", digits = 2))%>% 
+  as.data.frame()
+rownames(hcw_t2) <- hcw_t2$role
+rownames(hhd_t2) <- hhd_t2$role
+
+## add in population
+cases_pop2 <- cases_pop %>% 
+  mutate(`Risk (%)` = formatC(cases_pop$p, format = "f", digits = 2),
+         role = c("Population (working age)", "Population")) %>% 
+  select(-res, -p) %>% 
+  rename(N = n, Hospitalised = x) 
+
+hcw_t2 <- bind_rows(cases_pop2 %>% 
+                      filter(agelimit == "wa") %>% select(-agelimit),
+                    hcw_t2) %>% 
+  select(role, everything())
+hcw_t2 <- hcw_t2 %>% t()
+hcw_t2 <- hcw_t2[, c(1, 2, 4, 3)]
+
+hhd_t2 <- bind_rows(cases_pop2 %>% 
+                      filter(agelimit == "all") %>% 
+                      select(-agelimit),
+                    hhd_t2) %>% 
+  select(role, everything())
+hhd_t2 <- hhd_t2 %>% t()
+hhd_t2 <- hhd_t2[, c(1, 2, 4, 3)]
+
+```
+
+```{r combinewithevents}
+# pop N
+myrownames <- c(rownames(hcw_t2)[-1], brs[,1])
+brs_t2 <- brs[,-(1)]
+mycolnames <- colnames(brs_t2)
+events_t2 <- cbind(hcw_t2, hhd_t2)[-1,]
+
+t2_final <- rbind(events_t2,
+                  brs_t2)
+colnames(t2_final) <- mycolnames
+rownames(t2_final) <- myrownames
+colnames(t2_final)[c(1, 5)] <- c("Population (working age)",
+                                 "Population (all ages)")
+
+t2_final <- t2_final [c("Hospitalised", 
+                        "N", 
+                        "Risk (%)", 
+                        "Model 1, Age and sex",
+                        "Model 2, as model 1 plus socioeconomic deprivation and ethnicity", 
+                        "Model 3 as model 2, plus comorbidity", 
+                        "Model 4, as model 3 plus occupation and grade", 
+                        "Model 5, as model 4 plus part time status"
+                        ),]
+
+knitr::kable(t2_final)
+
+```
+
+
+## Cases outcomes
+
+```{r case_outcomes}
+opts <- options(knitr.kable.NA = "")
+cases_tbl3 <- cases_tbl %>% 
+  # clean_names() %>% 
+  mutate_at(vars(-X1), function(x) if_else(str_detect(cases_tbl$X1, "\\%"), str_replace(x, "\\)", "%)"), x)) %>% 
+  mutate_at(vars(-X1), function(x) if_else(cases_tbl$X1 %in% c("<18", ">65"), "", x))
+names(cases_tbl3)[1] <- ""
+knitr::kable(cases_tbl3)
+```
+
+
+
+# Abstract
+
+**Background**: Many healthcare staff work in high-risk settings for contracting and transmitting Severe Acute Respiratory Syndrome Coronavirus 2. Their risk of hospitalization for coronavirus disease 2019 (COVID-19), and that of their households, is poorly understood.
+**Methods**: In a Scotland-wide record linkage study we examined the risk of COVID-19 hospitalization among patient and non-patient facing healthcare workers (age: 18-65 years) and their households compared to the general population from 1st March 2020 to 6th June 2020 (since June 2020 there have been very few cases of COVID-19 in Scotland).
+**Results**: The cohort comprised of `r nrow(hcw)` healthcare workers and `r nrow(hhd)`  household members. Most healthcare workers were patient facing (`r role["pf_any", "res"] `). Of all COVID-19 hospitalizations in the working age population (18-65-year-old), `r cases_18to65_p["hcwhhd"]`% (`r cases_18to65_n["hcwhhd"]`/`r cases_18to65_n["tot"]` were in healthcare workers or their households. Adjusting for age, sex and comorbidity count, the risk of COVID-19 hospitalization in non-patient facing healthcare workers and their household members was similar to the general population (adjusted hazards ratio [HR] `r mdl_outs %>% filter(comparison == "pop", staff == "staff", params == "rolepopulation", model == "como") %>% pull(res_styl_line)` and `r mdl_outs %>% filter(staff == "household", model == "como", params == "rolepopulation") %>% pull(res_styl_line)` respectively). Patient facing healthcare workers, however, were at higher risk (HR `r mdl_outs %>% filter(staff == "staff", model == "como", params == "rolepf_any") %>% pull(res_styl_line)`); so too were household members of patient facing healthcare workers (HR `r mdl_outs %>% filter(staff == "household", model == "agesex", params == "rolepf_any") %>% pull(res_styl_line)`). For most patient facing healthcare workers the estimated absolute risk of COVID-19 hospitalization was less than 0.5% but increased to above 1% in older men with comorbidity. 
+**Conclusion**: Healthcare workers and their households contribute a sixth of hospitalized COVID-19 cases. Whilst the absolute risk of hospitalization was low, patient facing healthcare workers and their households have 3- and 2-fold increased risk of COVID-19 hospitalization.
