@@ -1,0 +1,11 @@
+abbrev|name|comment
+GCC|General Chiropractic Council|
+GDC|General Dental Council|
+GMC|General Medical Council|
+GOC|General Optical Council|
+GPC|General Pharmaceutical Council|
+HPC|Health and Care Professions Council|Arts therapists, Biomedical scientists, Chiropodists / podiatrists, Clinical scientists, Dietitians, Hearing aid dispensers, Occupational therapists, Operating department practitioners, Orthoptists, Paramedics, Physiotherapists, Practitioner psychologists, Prosthetists / orthotists, Radiographers, Speech and language therapists
+NMC|Nursing and Midwifery Council|
+RPS|Royal Pharmaceutical Society|not a council
+SSC|Social services Council|
+NA|Missing|

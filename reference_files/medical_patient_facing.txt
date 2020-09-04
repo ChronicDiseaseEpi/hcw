@@ -1,0 +1,88 @@
+specialty	npf	pf_any	pf_front	pf_resp_oro_agp	pf_icu
+Acute Internal Medicine	0	1	1	0	0
+Allergy	0	0	0	0	0
+Anaesthetics	0	1	0	0	1
+Audio Vestibular Medicine	0	0	0	0	0
+Audiological Medicine	0	0	0	0	0
+Blood Transfusion	0	0	0	0	0
+Breast Screening Service	0	0	0	0	0
+Cardiology	0	1	0	0	0
+Cardiothoracic Surgery	0	1	0	0	0
+Chemical Pathology	0	0	0	0	0
+Child And Adolescent Psychiatry	0	0	0	0	0
+Clinical Genetics	0	0	0	0	0
+Clinical Neurophysiology	0	0	0	0	0
+Clinical Oncology	0	1	0	0	0
+Clinical Pharmacology and Therapeutics	0	1	0	0	0
+Clinical Radiology	0	0	0	0	0
+Community Child Health	0	0	0	0	0
+Community Dentistry	0	1	0	1	0
+Community Psychiatry	0	1	0	0	0
+Community Sexual And Reproductive Health	0	1	0	0	0
+Dental and Maxillofacial Radiology	0	0	0	0	0
+Dental Public Health	0	0	0	0	0
+Dermatology	0	0	0	0	0
+Diagnostic Neuropathology	1	0	0	0	0
+Emergency Medicine	0	1	1	0	0
+Endocrinology And Diabetes	0	1	0	0	0
+Endodontics	0	1	0	1	0
+Ent Surgery	0	1	0	1	0
+Family Planning Service	0	0	0	0	0
+Fixed and Removable Prosthodontics	0	0	0	0	0
+Forensic Histopathology	1	0	0	0	0
+Forensic Psychiatry	0	0	0	0	0
+Gastroenterology	0	1	0	0	0
+General (Internal) Medicine	0	1	1	0	0
+General Psychiatry	0	1	0	0	0
+General Surgery	0	1	0	0	0
+Genito-Urinary Medicine	0	1	0	0	0
+Geriatric Medicine	0	1	1	0	0
+Gp Other Than Obstetrics	0	1	0	0	0
+Haematology	0	0	0	0	0
+Histopathology	1	0	0	0	0
+Homeopathy	0	0	0	0	0
+Immunology	0	0	0	0	0
+Infectious Diseases	0	1	1	0	0
+Intensive Care Medicine	0	1	0	0	1
+Medical Microbiology And Virology	0	0	0	0	0
+Medical Oncology	0	1	0	0	0
+Medical Ophthalmology	0	1	0	0	0
+Microbiology	0	0	0	0	0
+Neurology	0	1	0	0	0
+Neurosurgery	0	1	0	0	0
+Nuclear Medicine	0	0	0	0	0
+Obstetrics And Gynaecology	0	1	0	0	0
+Occupational Medicine	0	1	0	0	0
+Old Age Psychiatry	0	1	0	0	0
+Ophthalmology	0	1	0	0	0
+Oral And Maxillofacial Surgery	0	1	0	1	0
+Oral And Maxillofacial Pathology	1	0	0	0	0
+Oral Medicine	0	1	0	1	0
+Oral Microbiology	0	0	0	0	0
+Oral Pathology	0	0	0	0	0
+Oral Surgery	0	1	0	1	0
+Orthodontics	0	1	0	1	0
+Otolaryngology	0	1	0	1	0
+Paediatric And Perinatal Pathology	1	0	0	0	0
+Paediatric Cardiology	0	1	0	0	0
+Paediatric Dentistry	0	1	0	1	0
+Paediatric Surgery	0	1	0	0	0
+Paediatrics	0	1	1	0	0
+Pain Management	0	0	0	0	0
+Palliative Medicine	0	0	0	0	0
+Plastic Surgery	0	1	0	0	0
+Psychiatry Of Learning Disability	0	0	0	0	0
+Psychotherapy	0	0	0	0	0
+Public Health Medicine	1	0	0	0	0
+Rehabilitation Medicine	0	1	0	0	0
+Renal Medicine	0	1	0	0	0
+Respiratory Medicine	0	1	0	1	0
+Restorative Dentistry	0	0	0	0	0
+Rheumatology	0	1	0	0	0
+Special Care Dentistry	0	1	0	1	0
+Surgical Dentistry	0	1	0	1	0
+Trauma And Orthopaedic Surgery	0	1	0	0	0
+Urology	0	1	0	0	0
+Vascular Surgery	0	1	0	0	0
+Virology	0	0	0	0	0
+Well Woman Service	0	0	0	0	0

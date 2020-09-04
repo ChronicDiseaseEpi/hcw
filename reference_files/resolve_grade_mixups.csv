@@ -1,0 +1,114 @@
+grade,grade_r,medicalgrade,n,slct
+ASSOCIATE SPECIALIST,Associate Specialist,Consultant,redact_count,drop
+ASSOCIATE SPECIALIST,Associate Specialist,Senior Dental Officer,redact_count,drop
+ASSOCIATE SPECIALIST,Associate Specialist,Staff Grade,redact_count,grade_r
+CLINICAL LEADER,Clinical lead,Clinical Director,redact_count,medicalgrade
+CONSULTANT,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT (NON TRANSITIONAL),Consultant,Associate Specialist,redact_count,grade_r
+CONSULTANT (NON TRANSITIONAL),Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT (NON TRANSITIONAL),Consultant,Clinical Fellow,redact_count,grade_r
+CONSULTANT (NON TRANSITIONAL),Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT (NON TRANSITIONAL),Consultant,Salaried GP,redact_count,grade_r
+CONSULTANT (NON TRANSITIONAL),Consultant,Senior Dental Officer,redact_count,medicalgrade
+CONSULTANT (NON TRANSITIONAL),Consultant,Specialty Doctor,redact_count,grade_r
+CONSULTANT (NON TRANSITIONAL),Consultant,Specialty Registrar,redact_count,grade_r
+CONSULTANT + 1 YR,Consultant,Locum Appointment Service,redact_count,grade_r
+CONSULTANT + 1 YR,Consultant,Senior Dental Officer,redact_count,medicalgrade
+CONSULTANT + 10 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 10 YRS,Consultant,Senior Dental Officer,redact_count,medicalgrade
+CONSULTANT + 11 YRS,Consultant,Director of Public Health,redact_count,medicalgrade
+CONSULTANT + 12 YEARS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 12 YEARS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 15 YEARS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 16 YEARS,Consultant,Director of Public Health,redact_count,medicalgrade
+CONSULTANT + 18 YEARS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 19 YEARS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 2 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 20 YEARS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 20 YEARS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 21-29 YEARS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 21-29 YEARS,Consultant,Salaried GP,redact_count,drop
+CONSULTANT + 3 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 4 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 4 YRS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 4 YRS,Consultant,Senior Dental Officer,redact_count,medicalgrade
+CONSULTANT + 5 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 6 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 7/8YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT + 7/8YRS,Consultant,Director of Public Health,redact_count,medicalgrade
+CONSULTANT + 7/8YRS,Consultant,Medical Director,redact_count,medicalgrade
+CONSULTANT + 9 YRS,Consultant,Clinical Director,redact_count,medicalgrade
+CONSULTANT IN PUBLIC HEALTH MEDICINE,Consultant,Salaried GP,redact_count,drop
+CONSULTANT+ 15 YEARS,Consultant,Medical Director,redact_count,drop
+CONSULTANTS,Consultant,Salaried GP,redact_count,drop
+CORE TRAINING SPECIALTY REGISTRAR(STRCT),Specialty Registrar,Clinical Fellow,redact_count,grade_r
+CORE TRAINING SPECIALTY REGISTRAR(STRCT),Specialty Registrar,Locum Appointment Training,redact_count,grade_r
+CORE TRAINING SPECIALTY REGISTRAR(STRCT),Specialty Registrar,Specialty Registrar (Core Training),redact_count,grade_r
+DENTAL CORE TRAINING 1 GRADE,Dental Core Training - Grade 1,Specialty Registrar,redact_count,grade_r
+FIXED TERM SPECIALTY REGISTRAR (STRFT),Specialty Registrar,Clinical Fellow,redact_count,grade_r
+FIXED TERM SPECIALTY REGISTRAR (STRFT),Specialty Registrar,Locum Appointment Service,redact_count,grade_r
+FIXED TERM SPECIALTY REGISTRAR (STRFT),Specialty Registrar,Specialist Registrar,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 1,Foundation House Officer Year 1,Clinical Fellow,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 1,Foundation House Officer Year 1,Foundation House Officer Year 2,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 1,Foundation House Officer Year 1,Foundation Year 1,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 1,Foundation House Officer Year 1,Locum Appointment Training,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 2,Foundation House Officer Year 2,Clinical Fellow,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 2,Foundation House Officer Year 2,Foundation House Officer Year 1,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 2,Foundation House Officer Year 2,Locum Appointment Service,redact_count,grade_r
+FOUNDATION HOUSE OFFICER 2,Foundation House Officer Year 2,Specialty Registrar,redact_count,grade_r
+GEMS MEDICAL DIRECTOR,Medical director,Salaried GP,redact_count,grade_r
+GENERAL PRACTITIONER,GP,Part time Medical Practitioner Para 94 app.,redact_count,drop
+GP APPRAISER,GP,Consultant,redact_count,drop
+GP LOCAL APPRAISAL ADVISER,GP,Consultant,redact_count,drop
+GP SPECIAL INTERESTS,GP,General Practice Specialty Training,redact_count,grade_r
+HOSPITAL PRACTITIONER,Hospital Practitioner,Salaried GP,redact_count,drop
+LOCAL SALARIED GP RANGE,GP,Clinical Director,redact_count,medicalgrade
+LOCUM FIXED TERM SPECIALTY REG (STRFT),Specialty Registrar,Clinical Fellow,redact_count,grade_r
+LOCUM FIXED TERM SPECIALTY REG (STRFT),Specialty Registrar,Locum Appointment Service,redact_count,grade_r
+LOCUM FOUNDATION HOUSE OFFICER 2,Foundation House Officer Year 2,Locum Appointment Service,redact_count,grade_r
+LOCUM SHO (INC SESS),SHO,Foundation House Officer Year 1,redact_count,grade_r
+LOCUM SPECIALITY REG BAND LL + 1A/2B,Specialty Registrar,Locum Appointment Service,redact_count,grade_r
+LOCUM SPECIALTY REGISTRAR (STR),Specialty Registrar,Foundation House Officer Year 2,redact_count,drop
+LOCUM SPECIALTY REGISTRAR (STR),Specialty Registrar,Locum Appointment Service,redact_count,grade_r
+MEDICAL BANK - STR LOWER LA,Specialty Registrar,Specialty Registrar (Core Training),redact_count,grade_r
+MEDICAL BANK - STR LOWER LB,Specialty Registrar,Specialty Registrar (Core Training),redact_count,grade_r
+MEDICAL BANK - STR LOWER LC,Specialty Registrar,Specialty Registrar (Core Training),redact_count,grade_r
+P/T GEN & DENTAL PRACTITIONERS,Salaried GDP,Part time Medical Practitioner Para 94 app.,redact_count,grade_r
+P/T GEN & DENTAL PRACTITIONERS,Salaried GDP,Salaried GP,redact_count,grade_r
+P/T GEN & DENTAL PRACTITIONERS,Salaried GDP,Specialty Doctor,redact_count,drop
+PDS BAND A - DENTAL OFFICER (PTS 1 - 6),Dental Officer,Salaried GDP,redact_count,grade_r
+PDS BND B-SNR. DENTAL OFFICER (PTS 7-12),Senior Dental Officer,Salaried GDP,redact_count,grade_r
+PDS BND C-ASS. CLIN. DIRECTOR(PTS 13-15),Assistant Clinical Director,Clinical Director,redact_count,grade_r
+PDS BND C-ASS. CLIN. DIRECTOR(PTS 13-15),Assistant Clinical Director,Senior Dental Officer,redact_count,medicalgrade
+PDS BND C-CLIN. DIREC/CADO STAND (13-16),Clinical Director,Senior Dental Officer,redact_count,medicalgrade
+RENFREWSHIRE/EAST REN CLIN DIRECTOR,Clinical Director,Salaried GP,redact_count,medicalgrade
+SALARIED GP,GP,Clinical Director,redact_count,drop
+SALARIED GP,GP,General Practice Specialty Training,redact_count,grade_r
+SALARIED GP,GP,Specialty Doctor,redact_count,drop
+SALARIED GP 40.00,GP,Clinical Director,redact_count,drop
+SHO - AUTOMATIC PROGRESSION,SHO,Dental Core Training - Grade 1,redact_count,medicalgrade
+SHO - AUTOMATIC PROGRESSION,SHO,Dental Core Training - Grade 2,redact_count,medicalgrade
+SHO - AUTOMATIC PROGRESSION,SHO,Foundation House Officer Year 1,redact_count,medicalgrade
+SHO - AUTOMATIC PROGRESSION,SHO,Foundation House Officer Year 2,redact_count,medicalgrade
+SHO - AUTOMATIC PROGRESSION,SHO,Senior Dental Officer,redact_count,drop
+SHO - AUTOMATIC PROGRESSION,SHO,Specialty Registrar,redact_count,drop
+SPECIALTY DOCTOR,Specialty Doctor,Associate Specialist,redact_count,grade_r
+SPECIALTY DOCTOR,Specialty Doctor,Clinical Director,redact_count,drop
+SPECIALTY DOCTOR,Specialty Doctor,Clinical Fellow,redact_count,either_final_same
+SPECIALTY DOCTOR,Specialty Doctor,Consultant,redact_count,drop
+SPECIALTY DOCTOR,Specialty Doctor,Dental Officer,redact_count,drop
+SPECIALTY DOCTOR,Specialty Doctor,Medical Director,redact_count,drop
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Clinical Fellow,redact_count,grade_r
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Consultant,redact_count,drop
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Dental Core Training - Grade 2,redact_count,medicalgrade
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Fixed Term Specialist Training Appointment,redact_count,grade_r
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Foundation House Officer Year 1,redact_count,drop
+SPECIALTY REGISTRAR (STR),Specialty Registrar,General Practice Specialty Training,redact_count,medicalgrade
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Locum Appointment Service,redact_count,grade_r
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Locum Appointment Training,redact_count,grade_r
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Salaried GP,redact_count,drop
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Specialist Registrar,redact_count,medicalgrade
+SPECIALTY REGISTRAR (STR),Specialty Registrar,Specialty Registrar (Core Training),redact_count,medicalgrade
+STAFF GRADE PRACT. - PRE 011097 CONDS,Staff Grade,Specialty Doctor,redact_count,grade_r
+STAFF GRADE PRACTITIONER (POST 01/10/97),Staff Grade,Specialty Doctor,redact_count,grade_r
+WIGTOWNSHIRE - RURAL HOSPITAL DOCTOR,Hospital Practitioner,Specialty Registrar,redact_count,grade_r

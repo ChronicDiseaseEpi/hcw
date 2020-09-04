@@ -1,0 +1,144 @@
+specialty,gmcspecialty,match_type,matching_round
+Acute Internal Medicine,Acute Internal Medicine,exact,1
+Acute Internal Medicine,General (internal) medicine,exact,1
+Anaesthetics,Anaesthetics,exact,1
+Blood Transfusion,Transfusion Medicine,exact,2
+Cardiology,Cardiology,exact,1
+Cardiothoracic Surgery,Cardiothoracic surgery,exact,1
+Cardiothoracic Surgery,Cardio-thoracic surgery,exact,1
+Cardiothoracic Surgery,Vascular surgery,approximate,2
+Cardiothoracic Surgery,Vascular Surgery,approximate,2
+Chemical Pathology,Chemical pathology,exact,1
+Chemical Pathology,Histopathology,exact,1
+Child And Adolescent Psychiatry,Child and adolescent psychiatry,exact,1
+Clinical Genetics,Clinical genetics,exact,1
+Clinical Neurophysiology,Clinical neurophysiology,exact,1
+Clinical Oncology,Clinical oncology,exact,1
+Clinical Oncology,Medical oncology,approximate,2
+Clinical Pharmacology & Therapeutics,Clinical pharmacology and therapeutics,approximate,2
+Clinical Radiology,Clinical radiology,exact,1
+Clinical Radiology,Diagnostic radiology,exact,2
+Clinical Radiology,Neuroradiology,approximate,2
+Community sexual and reproductive health,Community Sexual and Reproductive Health,exact,1
+Dermatology,Dermatology,exact,1
+Emergency Medicine,Accident and Emergency Medicine,exact,1
+Emergency Medicine,Emergency medicine,exact,1
+Endocrinology And Diabetes,Endocrinology and diabetes mellitus,exact,1
+Forensic Psychiatry,Forensic psychiatry,exact,1
+Gastroenterology,Gastroenterology,exact,1
+Gastroenterology,Gastro-enterology,exact,1
+General (Internal) Medicine,Acute Internal Medicine,exact,1
+General (Internal) Medicine,General (internal) medicine,exact,1
+General Psychiatry,Child and adolescent psychiatry,approximate,2
+General Psychiatry,General adult psychiatry,exact,1
+General Psychiatry,General psychiatry,exact,1
+General Psychiatry,General psychiatry/Liaison Psychiatry,approximate,2
+General Psychiatry,General psychiatry/Substance Misuse Psychiatry,approximate,2
+General Psychiatry,Liaison Psychiatry,approximate,2
+General Psychiatry,Old age psychiatry,approximate,2
+General Psychiatry,Psychiatric Rehabilitation,approximate,2
+General Psychiatry,Psychiatry of Addiction,approximate,2
+General Psychiatry,Psychiatry of learning disability,approximate,2
+General Surgery,Breast Surgery,approximate,2
+General Surgery,General surgery,exact,1
+Genito-Urinary Medicine,Genito-urinary medicine,exact,1
+Geriatric Medicine,Geriatric medicine,exact,1
+Geriatric Medicine,Geriatrics,exact,1
+Haematology,Haematology,exact,1
+Histopathology,Chemical Pathology,exact,1
+Histopathology,Cytopathology,approximate,2
+Histopathology,Diagnostic neuropathology,approximate,2
+Histopathology,Histopathology,exact,1
+Histopathology,Histopathology/Paediatric Pathology,approximate,2
+Histopathology,Neuropathology,approximate,2
+Immunology,Immunology,exact,1
+Infectious Diseases,Infectious diseases,exact,1
+Infectious Diseases,Tropical medicine,approximate,2
+Intensive Care Medicine,Intensive care medicine,exact,2
+Medical Microbiology And Virology,Medical microbiology,exact,1
+Medical Microbiology And Virology,Medical microbiology and virology,exact,1
+Medical Microbiology And Virology,Medical Virology,exact,2
+Medical Microbiology And Virology,Microbiology,exact,2
+Medical Oncology,Medical oncology,exact,1
+Medical Ophthalmology,Medical ophthalmology,exact,2
+Microbiology,Medical microbiology,exact,1
+Microbiology,Medical microbiology and virology,exact,1
+Microbiology,Medical Microbiology And Virology,exact,1
+Neurology,Neurology,exact,1
+Neurosurgery,Neurosurgery,exact,1
+none,Cancer Genetics,none,2
+none,Forensic Medicine,none,2
+none,Forensic Pathology,none,2
+none,Sport and Exercise Medicine,none,2
+Nuclear Medicine,Nuclear medicine,exact,2
+Obstetrics And Gynaecology,Obstetrics and gynaecology,exact,1
+Occupational Medicine,Occupational medicine,exact,1
+Old Age Psychiatry,Old age psychiatry,exact,1
+Ophthalmology,Ophthalmology,exact,1
+Oral & Maxillofacial Surgery,Oral and maxillo-facial surgery,exact,1
+Otolaryngology,Otolaryngology,exact,1
+Paediatric Cardiology,Paediatric cardiology,exact,1
+Paediatric Surgery,Neonatal Surgery,approximate,2
+Paediatric Surgery,Paediatric surgery,exact,1
+Paediatrics,Community Child Health,approximate,2
+Paediatrics,Neonatal Paediatrics,approximate,2
+Paediatrics,Neonatology,approximate,2
+Paediatrics,Paediatric Anaesthesia,approximate,2
+Paediatrics,Paediatric Nephrology,approximate,2
+Paediatrics,Paediatric Neurodisability,approximate,2
+Paediatrics,Paediatric Neurology,approximate,2
+Paediatrics,Paediatric Oncology,approximate,2
+Paediatrics,Paediatric Respiratory Medicine,approximate,2
+Paediatrics,Paediatrics,exact,1
+Paediatrics,Paediatrics/Paediatric Immunology  Infectious Diseases and Allergy,approximate,2
+Palliative Medicine,Palliative medicine,exact,1
+Plastic Surgery,Plastic surgery,exact,1
+Psychiatry of Learning Disability,Psychiatry of learning disability,exact,1
+Psychotherapy,Medical psychotherapy,exact,1
+Psychotherapy,Psychotherapy,exact,1
+Public Health Medicine,Epidemiology,approximate,2
+Public Health Medicine,Public health medicine,exact,1
+Rehabilitation Medicine,Rehabilitation medicine,exact,1
+Renal Medicine,Renal medicine,exact,1
+Respiratory Medicine,Respiratory medicine,exact,1
+Rheumatology,Rheumatology,exact,1
+Trauma & Orthopaedic Surgery,Orthopaedic surgery,exact,2
+Trauma & Orthopaedic Surgery,Orthopaedics,exact,2
+Trauma & Orthopaedic Surgery,Trauma and Orthopaedics,exact,2
+Trauma And Orthopaedic Surgery,Trauma and orthopaedic surgery,exact,1
+Urology,Urology,exact,1
+Vascular surgery,General surgery,approximate,2
+Virology,Medical microbiology and virology,exact,1
+Psychiatry of Learning Disability,General psychiatry,approximate,3
+General Psychiatry,Medical psychotherapy,approximate,3
+Child And Adolescent Psychiatry,Forensic psychiatry,approximate,3
+Community sexual and reproductive health,Obstetrics and gynaecology,approximate,3
+Anaesthetics,Intensive care medicine,approximate,3
+Anaesthetics,Paediatric Anaesthesia,approximate,3
+Child And Adolescent Psychiatry,Paediatrics,approximate,3
+Child And Adolescent Psychiatry,Psychiatry of learning disability,approximate,3
+Clinical Genetics,Cancer Genetics,approximate,3
+Community Child Health,Community Child Health,exact,3
+General Psychiatry,Forensic psychiatry,approximate,3
+General Psychiatry,Psychotherapy,approximate,3
+Genito-Urinary Medicine,Community Sexual and Reproductive Health,approximate,3
+Genito-Urinary Medicine,Obstetrics and gynaecology,approximate,3
+Geriatric Medicine,Rehabilitation medicine,approximate,3
+Haematology,Transfusion Medicine,approximate,3
+Intensive Care Medicine,Anaesthetics,approximate,3
+Neurology,Clinical neurophysiology,approximate,3
+Old Age Psychiatry,General psychiatry,approximate,3
+Ophthalmology,Medical ophthalmology,direct,3
+Psychiatry of Learning Disability,Child and adolescent psychiatry,approximate,3
+Psychotherapy,General psychiatry,approximate,3
+Trauma And Orthopaedic Surgery,Orthopaedic surgery,direct,3
+Trauma And Orthopaedic Surgery,Trauma and Orthopaedics,direct,3
+Vascular surgery,Vascular Surgery,direct,3
+Cardiology,Cardiology,direct,4
+General (Internal) Medicine,General (internal) medicine,direct,4
+Trauma And Orthopaedic Surgery,Trauma and orthopaedic surgery,direct,4
+Anaesthetics,Anaesthetics,direct,4
+General Surgery,General surgery,direct,4
+Geriatric Medicine,Geriatrics,direct,4
+Paediatrics,Paediatrics,direct,4
+Public Health Medicine,Public health medicine,direct,4
