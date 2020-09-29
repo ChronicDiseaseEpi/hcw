@@ -213,9 +213,9 @@ MakePredData <- function(mymod){
                           como = c("0", "1", "2pls"),
                           hosptlsd = 1L, stratum = "a", time = 31*3)
   
-  pres <- predict(mod_pars_inter, newdata = new_data, type = "expected", se.fit = TRUE)
-  new_data$uci <- pres$fit + 1.96*pres$se.fit
-  new_data$lci <- pres$fit - 1.96*pres$se.fit
+  pres <- predict(mymod, newdata = new_data, type = "expected", se.fit = TRUE)
+  new_data$uci <- pres$fit + pres$se.fit
+  new_data$lci <- pres$fit - pres$se.fit
   new_data$est <- pres$fit
   
   new_data <- new_data %>% 
