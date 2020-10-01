@@ -417,20 +417,39 @@ mod_pars <- coxph(Surv(time, hosptlsd) ~ pspline(age10) + male + strata(stratum)
                     role + como, data = hcw %>% filter(!is.na(stratum)))
 mod_pars_inter <- coxph(Surv(time, hosptlsd) ~ pspline(age10) + male + strata(stratum) + 
                           role + como +  male:role + como:role, data = hcw %>% filter(!is.na(stratum)))
-MakePredData <- function(mymod){
-  new_data <- expand_grid(age10 = (18:65)/10, 
-                          male = 0:1, 
-                          role = c("npf", "pf_any", "undetermined"),
-                          como = c("0", "1", "2pls"),
-                          hosptlsd = 1L, stratum = "a", time = 31*3)
+
+new_data_sf <- expand_grid(age10 = (18:65)/10, 
+                           male = 0:1, 
+                           role = c("npf", "pf_any", "undetermined"),
+                           como = c("0", "1", "2pls"),
+                           hosptlsd = 1L, stratum = "a", time = 31*3)
+
+MakePredData <- function(mymod, new_data = new_data_sf){
+  # pres <- predict(mymod, newdata = new_data, type = "expected", se.fit = TRUE)
+  # obtain log-hazard ratios for combinations of factors
+  pres2 <- predict(mymod, newdata = new_data, type = "lp", se.fit = TRUE)
+  # multiple standard errors by 1.96 to obtain 1.96se
+  pres2$se.fit <- pres2$se.fit*1.96
+  # Produce lci and uci for the log-hazard ratios
+  pres2$lci <- pres2$fit - pres2$se.fit
+  pres2$uci <- pres2$fit + pres2$se.fit
+  # obtain the baseline cumulative hazard
+  bh <- basehaz(mymod)
+  bh <- bh %>% 
+    filter(strata == "a") %>% 
+    tail(1) %>% 
+    pull(hazard)
+  # Multiply the baseline cumulative hazard by the hazard ratio to obtain the cumualtive hazard for the covariate levels
+  pres2[] <- map(pres2, ~ exp(.x) * bh)
+  # convert the cumulative hazard into the cumulative incidence (risk 1 - e^(cumulative_hazard))
+  pres2[] <- map(pres2, ~ 1- exp(-.x))
   
-  pres <- predict(mymod, newdata = new_data, type = "expected", se.fit = TRUE)
-  new_data$uci <- pres$fit - pres$se.fit
-  new_data$lci <- pres$fit + pres$se.fit
-  new_data$est <- pres$fit
-  
+  # add these onto dataframe
   new_data <- new_data %>% 
-    mutate(Sex = factor(male, levels = c(0, 1), labels = c("Women", "Men")),
+    mutate(est = pres2$fit,
+           lci = pres2$lci,
+           uci = pres2$uci,
+           Sex = factor(male, levels = c(0, 1), labels = c("Female", "Male")),
            Role = factor(role, 
                          levels = c("npf", "undetermined", "pf_any"),
                          labels = c("Non patient-facing", "Undetermined", "Patient-facing")),
@@ -438,6 +457,7 @@ MakePredData <- function(mymod){
                          labels = c("None", "One", "Two or more")))
   new_data
 }
+
 new_data_main <- MakePredData(mod_pars)
 new_data_inter <- MakePredData(mod_pars_inter)
 
